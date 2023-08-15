@@ -1,7 +1,11 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
+  <meta charset=""UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
   <title>Timezone Extension Popup</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     body {
       width: 200px;
@@ -10,6 +14,52 @@
   </style>
 </head>
 <body>
-  <h1>Hello World</h1>
+    <h1>Address to Time Zone Converter</h1>
+    <label for="address">Enter an address:</label>
+    <input type="text" id="address" placeholder="Enter an address">
+    <button id="convertBtn">Convert</button>
+    <p id="result"></p>
+  
+    <script>
+      $(document).ready(function() {
+        $('#convertBtn').click(function() {
+          const address = $('#address').val();
+          if (address === '') {
+            $('#result').text('Please enter an address.');
+            return;
+          }
+  
+          const mapsApiKey = 'AIzaSyBjQuWkOeXIkD9AfKSaGZIxUjtXs60t6dQ';
+  
+          // Step 1: Convert address to coordinates using Geocoding API
+          const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${mapsApiKey}`;
+  
+          $.get(geocodingUrl, function(geocodingData) {
+            if (geocodingData.status === 'OK') {
+              const coordinates = geocodingData.results[0].geometry.location;
+              const lat = coordinates.lat;
+              const lng = coordinates.lng;
+  
+              // Step 2: Get time zone using Time Zone API
+              const timezoneUrl = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${lng}&timestamp=${Math.floor(Date.now() / 1000)}&key=${mapsApiKey}`;
+  
+              $.get(timezoneUrl, function(timezoneData) {
+                const timeZoneId = timezoneData.timeZoneId;
+                const timeZoneName = timezoneData.timeZoneName;
+  
+                $('#result').html(`Time Zone ID: ${timeZoneId}<br>Time Zone Name: ${timeZoneName}`);
+              });
+            } else {
+              $('#result').text('Geocoding API request failed. Please check your address or API key.');
+            }
+          });
+        });
+      });
+    </script>
+
+
+
+
+
 </body>
 </html>
