@@ -7,7 +7,7 @@ $('#convertBtn').click(function() {
     return;
     }
 
-    const mapsApiKey = 'AIzaSyBjQuWkOeXIkD9AfKSaGZIxUjtXs60t6dQ';
+    const mapsApiKey = '';
 
     //Convert address to coordinates using Geocoding API
     const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${mapsApiKey}`;
