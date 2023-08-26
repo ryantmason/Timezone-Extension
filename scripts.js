@@ -15,7 +15,7 @@ $('#convertBtn').click(function() {
     return;
     }
 
-    const mapsApiKey = 'AIzaSyA6LXL7L2bzcy1evbjJha4E8RB_7K0t7rs';
+    const mapsApiKey = '';
 
     //Convert address to coordinates using Geocoding API
     const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${mapsApiKey}`;
@@ -35,14 +35,11 @@ $('#convertBtn').click(function() {
         const timeZoneName = timezoneData.timeZoneName;
 
         
-        var rawOffset = new Date();
+        const rawOffset = timezoneData.rawOffset;
         const convertOffset = rawOffset / 4;
 
-        $('#result').html(`Raw Offset: ${rawOffset} Converted Offset: ${convertOffset}`); //TESTING
+        $('#result').html(`Time Zone ID: ${timeZoneId}<br>Time Zone Name: ${timeZoneName}<br>Raw Offset: ${rawOffset} Converted Offset: ${convertOffset}`);
 
-        $('#result').html(`Time Zone ID: ${timeZoneId}<br>Time Zone Name: ${timeZoneName}`);
-
-        $('#result').html(`Time Zone ID: ${timeZoneId}<br>Time Zone Name: ${timeZoneName}`);
         });
     } else {
         $('#result').text('Error Retrieving Time Zone');
