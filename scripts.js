@@ -42,19 +42,20 @@ $('#convertBtn').click(function() {
         // create timeZoneId const (Ex. America/Los_Angeles)     
         const timeZoneId = timezoneData.timeZoneId;
         const parts = timeZoneId.split('/'); // Split the string into an array using '/'
-        const timeZoneCity = parts[1];
+        let timeZoneCity = parts[1];
 
+        // remove _ in two part city names
         if (timeZoneCity.includes('_')){
             
-            //const cparts = timeZoneCity.split('_');
-            //const timeZoneCity = cparts[0] + cparts[1];
+            const cparts = timeZoneCity.split('_');
+            timeZoneCity = cparts[0].concat(" ", cparts[1]);
 
-            $('#test').html(`TEST CITY NAME: ${timeZoneCity}`);
         }
-
+        
         // create timeZoneName const (Ex. Pacific Daylight Time)
         const timeZoneName = timezoneData.timeZoneName;
 
+        // ------------Raw Offset Conversion -> UTC Offset-----------------
         const rawOffset = timezoneData.rawOffset;
             
         const rawOffsetHours = rawOffset / 3600;
@@ -66,7 +67,8 @@ $('#convertBtn').click(function() {
         const offsetHours = Math.floor(absHours);
         const offsetMinutes = Math.floor(minutes);
 
-        const convertOffset = `(UTC${offsetSign}${offsetHours.toString().padStart(2, '0')}:${offsetMinutes.toString().padStart(2, '0')})`;
+        const convertOffset = `(GMT${offsetSign}${offsetHours.toString().padStart(2, '0')}:${offsetMinutes.toString().padStart(2, '0')})`;
+        // ----------------------------------------------------------------
 
         // Display (UTC-00:00) Time Zone Name - majorCityName
         $('#result').html(`${convertOffset} ${timeZoneName} - ${timeZoneCity}`);
