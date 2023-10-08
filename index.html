@@ -6,21 +6,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <script src="jquery-3.6.3.min.js"></script>    
         <script src="scripts.js"></script>
-        <title>Timezone Extension Popup</title>
-        <style>
-            body {
-            width: 300px;
-            height: 400px;
-            text-align: center;
-            }
-        </style>
+        <link rel="stylesheet" href="tzstyles.css">
+        <title>Address -> Time Zone</title>
     </head>
     <body>
-        <h1>Address to Time Zone Converter</h1>
-        <label for="address">Enter an address:</label>
-        <input type="text" id="address" placeholder="Enter an address">
-        <button id="convertBtn">Convert</button>
-        <p id="test"></p>
+        <div class="container">
+            <h2 class="title">Address -> Time Zone</h2>
+            <p class="subtitle">
+                Enter an address below and it will display it's respective timezone.
+                <br>
+                (Can also enter City, County, or State)
+            </p>
+            <div class="form">
+                <input type="text" id="address" placeholder="Enter an address" />
+                <button id="form_button">Convert</button>
+            </div>
+        </div>
+
         <p id="result"></p>
+
+
     </body>
 </html>

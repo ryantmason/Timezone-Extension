@@ -3,7 +3,7 @@
 $(document).ready(function() {
 
 // function that will execute when convertBtn(button id) in html is pressed
-$('#convertBtn').click(function() {
+$('#form_button').click(function() {
 
     // constant for address
     const address = $('#address').val();
@@ -11,7 +11,7 @@ $('#convertBtn').click(function() {
     // Ensure address entry is not blank
     if (address === '') {
 
-    $('#result').text('Please Enter an Address');
+    $('#result').text('Please Enter an Address'); // Displays
     return;
     }
     // api key (needs to be hidden)
